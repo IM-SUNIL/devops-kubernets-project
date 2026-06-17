@@ -76,10 +76,11 @@ Push Image to AWS ECR
 SSH to EC2
     ↓
 Kubernetes Rolling Update
+```
 
 
 ### Frontend Pipeline
-
+```text
 Git Push
     ↓
 GitHub Actions
@@ -92,7 +93,6 @@ SSH to EC2
     ↓
 Kubernetes Rolling Update
 ```
-
 ## Kubernetes Components Used
 
 ### Deployments
