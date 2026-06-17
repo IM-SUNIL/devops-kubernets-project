@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: express-ingress
+
+spec:
+  ingressClassName: traefik
+
+  tls:
+  - hosts:
+    - api.devops.sunilsinghrajput.in
+    secretName: devops-tls
+
+  rules:
+  - host: api.devops.sunilsinghrajput.in
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: express-service
+            port:
+              number: 80
