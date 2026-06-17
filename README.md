@@ -152,7 +152,7 @@ Implemented rolling deployments to update applications without downtime.
 
 
 ## Project Structure
-
+```text
 kubernetes/
 │
 ├── frontend-deployment.yaml
@@ -169,7 +169,7 @@ kubernetes/
 │
 └── certificate.yaml
 
-
+```
 ## Screenshots
 
 ### Application Running
