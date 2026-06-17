@@ -14,7 +14,7 @@ The project also includes HTTPS using Let's Encrypt SSL/TLS certificates, Kubern
 **Backend API:** https://api.devops.sunilsinghrajput.in
 
 
-
+```text
 ## Architecture
 
 Internet
@@ -31,7 +31,7 @@ Frontend      Backend API
                  │
                  ▼
        Persistent Volume Claim
-
+```
 ## Tech Stack
 
 * AWS EC2
@@ -91,7 +91,7 @@ Push Image to AWS ECR
 SSH to EC2
     ↓
 Kubernetes Rolling Update
-
+```
 
 ## Kubernetes Components Used
 
