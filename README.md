@@ -14,9 +14,9 @@ The project also includes HTTPS using Let's Encrypt SSL/TLS certificates, Kubern
 **Backend API:** https://api.devops.sunilsinghrajput.in
 
 
-```text
-## Architecture
 
+## Architecture
+```text
 Internet
     │
     ▼
