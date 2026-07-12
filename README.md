@@ -6,6 +6,7 @@ This project demonstrates the deployment of a full-stack application on Kubernet
 
 The project also includes HTTPS using Let's Encrypt SSL/TLS certificates, Kubernetes Ingress with Traefik, Docker containerization, and Persistent Volume Claims (PVCs) for database storage.
 
+In addition, Ansible is used to automate Kubernetes worker node setup and cluster expansion across multiple EC2 instances, making the infrastructure more scalable and closer to a production-style deployment.
 
 ## Live Application
 
@@ -39,6 +40,7 @@ Frontend      Backend API
 * Docker
 * AWS ECR
 * GitHub Actions
+* Ansible
 * Node.js & Express.js
 * PostgreSQL
 * Traefik Ingress Controller
@@ -56,6 +58,7 @@ Frontend      Backend API
 * PostgreSQL database with persistent storage
 * Rolling updates with zero downtime deployments
 * Domain-based routing using Traefik Ingress
+* Kubernetes worker node provisioning using Ansible
 * Frontend and backend deployed independently
 
 
@@ -92,6 +95,29 @@ Push Image to AWS ECR
 SSH to EC2
     ↓
 Kubernetes Rolling Update
+```
+
+### Ansible Automation
+
+Ansible is used to automate worker node setup and cluster expansion.
+
+## What Ansible Does
+* Updates worker nodes
+* Installs required packages
+* Fetches K3s join token from the master node
+* Installs K3s agent on worker nodes
+* Joins workers to the existing K3s cluster
+
+```text
+Ansible Controller (Master Node)
+    ↓
+Read K3s token from master
+    ↓
+Connect to worker nodes via SSH
+    ↓
+Install K3s Agent
+    ↓
+Join worker nodes to cluster
 ```
 ## Kubernetes Components Used
 
@@ -149,7 +175,9 @@ Configured HTTPS using:
 
 Implemented rolling deployments to update applications without downtime.
 
+### Cluster Expansion
 
+Used Ansible to automate worker node preparation and K3s agent installation for multi-node cluster growth.
 
 ## Project Structure
 ```text
@@ -168,7 +196,14 @@ kubernetes/
 ├── postgres-pvc.yaml
 │
 └── certificate.yaml
-
+ansible/
+│
+├── ansible.cfg
+├── inventory.ini
+└── playbooks/
+    ├── common.yml
+    └── join_workers.yml
+    └── verify_cluster.yml
 ```
 ## Screenshots
 
@@ -214,6 +249,7 @@ https://github.com/IM-SUNIL/k8s-express-demo
 * SSL/TLS with Let's Encrypt
 * Kubernetes Troubleshooting
 * Rolling Updates and Deployment Strategies
+* Ansible-based node provisioning and cluster expansion
 * Private Container Registry Authentication
 
 
