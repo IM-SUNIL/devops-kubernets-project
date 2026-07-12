@@ -1,0 +1,12 @@
+- name: Verify Cluster
+  hosts: k3s_master
+  become: yes
+
+  tasks:
+
+    - name: Show Nodes
+      command: kubectl get nodes
+      register: cluster
+
+    - debug:
+        var: cluster.stdout_lines
