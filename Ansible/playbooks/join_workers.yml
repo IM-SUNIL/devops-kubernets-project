@@ -1,0 +1,33 @@
+- name: Read K3s Token
+  hosts: k3s_master
+  become: yes
+  gather_facts: no
+
+  tasks:
+
+    - name: Read node token
+      command: cat /var/lib/rancher/k3s/server/node-token
+      register: k3s_token
+
+    - name: Save token
+      set_fact:
+        cluster_token: "{{ k3s_token.stdout }}"
+
+- name: Join Worker Nodes
+  hosts: k3s_workers
+  become: yes
+  gather_facts: no
+
+  vars:
+    master_ip: <MASTER_PRIVATE_IP>
+
+  tasks:
+
+    - name: Install K3s Agent
+      shell: |
+        curl -sfL https://get.k3s.io | \
+        K3S_URL=https://{{ master_ip }}:6443 \
+        K3S_TOKEN={{ hostvars['master']['cluster_token'] }} \
+        sh -
+      args:
+        creates: /usr/local/bin/k3s-agent
